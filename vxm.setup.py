@@ -10,6 +10,7 @@ import os
 from subprocess import run, PIPE
 
 CURRENT_PATH = os.path.dirname(os.path.abspath(__file__))
+VXENV_PATH = '/opt/vixen-env'
 
 feature = {
     'name': 'Vixen Display Client'
@@ -46,7 +47,7 @@ setup = {
             'requirements': [
                 {
                     'purpose': 'Check Vixen environment installation',
-                    'callback': lambda: os.path.isdir(feature['install_path']),
+                    'callback': lambda: os.path.isdir(VXENV_PATH),
                     'failure_details': 'Vixen Environment was not found'
                 },
                 {
@@ -81,7 +82,7 @@ update = {
             'requirements': [
                 {
                     'purpose': 'Check Vixen environment installation',
-                    'callback': lambda: os.path.isdir(feature['install_path']),
+                    'callback': lambda: os.path.isdir(VXENV_PATH),
                     'failure_details': 'Vixen Environment was not found'
                 },
                 {
@@ -115,7 +116,7 @@ remove = {
             'requirements': [
                 {
                     'purpose': 'Check Vixen environment installation',
-                    'callback': lambda: os.path.isdir(feature['install_path']),
+                    'callback': lambda: os.path.isdir(VXENV_PATH),
                     'failure_details': 'Vixen Environment was not found'
                 },
                 {
