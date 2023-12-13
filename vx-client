@@ -1,0 +1,32 @@
+#!/usr/bin/env python3
+
+"""
+Author            : Nohavye
+Author's Email    : noha.poncelet@gmail.com
+Repository        : https://github.com/vixen-shell/vixen-client.git
+Description       : vixen display client executable.
+License           : GPL3
+"""
+
+import argparse, signal
+from vixen_client_lib import ClientStarter
+
+client_starter = ClientStarter()
+
+def signal_handler(sig, frame):
+    client_starter.stop()
+
+if __name__ == "__main__":
+    signal.signal(signal.SIGINT, signal_handler)
+
+    parser = argparse.ArgumentParser(description = f"""
+        Client to launch Vixen Shell layers and windows.
+    """)
+
+    parser.add_argument('--config', '-c', type = str, help = 'Client configuration file.')
+    parser.add_argument('--mode', '-m', type = str, choices=['layer', 'window'], default='window', help = 'Set client mode. (Window by default.)')
+    parser.add_argument('--dev', '-d', default = False, type = bool, help = "Development mode. (Use 'devUrl' parameters in the configuration file.)")
+
+    args = parser.parse_args()
+
+    client_starter.start(args.config)
