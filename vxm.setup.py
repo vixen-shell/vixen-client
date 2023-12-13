@@ -53,21 +53,21 @@ setup = {
                     'purpose': 'Check an existing library installation',
                     'callback': lambda: not package_exist(library['name']),
                     'failure_details': f"{feature['name']} is already installed"
-                },
-                {
-                    'purpose': 'Remove build folders',
-                    'process_command': f"sudo rm -r {CURRENT_PATH}/build && sudo rm -r {CURRENT_PATH}/{library['name']}.egg-info",
-                },
-                {
-                    'purpose': f"Install {feature['name']} executable",
-                    'process_command': executable['install_command'],
-                    'cancel_command': executable['remove_command']
-                },
-                {
-                    'purpose': f"Patch {feature['name']} executable",
-                    'process_command': executable['patch_command']
                 }
             ]
+        },
+        {
+            'purpose': 'Remove build folders',
+            'process_command': f"sudo rm -r {CURRENT_PATH}/build && sudo rm -r {CURRENT_PATH}/{library['name']}.egg-info",
+        },
+        {
+            'purpose': f"Install {feature['name']} executable",
+            'process_command': executable['install_command'],
+            'cancel_command': executable['remove_command']
+        },
+        {
+            'purpose': f"Patch {feature['name']} executable",
+            'process_command': executable['patch_command']
         }
     ]
 }
@@ -88,20 +88,20 @@ update = {
                     'purpose': 'Check an existing library installation',
                     'callback': lambda: package_exist(library['name']),
                     'failure_details': f"{feature['name']} is not installed"
-                },
-                {
-                    'purpose': 'Remove build folders',
-                    'process_command': f"sudo rm -r {CURRENT_PATH}/build && sudo rm -r {CURRENT_PATH}/{library['name']}.egg-info",
-                },
-                {
-                    'purpose': f"Update {feature['name']} executable",
-                    'process_command': executable['install_command']
-                },
-                {
-                    'purpose': f"Patch {feature['name']} executable",
-                    'process_command': executable['patch_command']
                 }
             ]
+        },
+        {
+            'purpose': 'Remove build folders',
+            'process_command': f"sudo rm -r {CURRENT_PATH}/build && sudo rm -r {CURRENT_PATH}/{library['name']}.egg-info",
+        },
+        {
+            'purpose': f"Update {feature['name']} executable",
+            'process_command': executable['install_command']
+        },
+        {
+            'purpose': f"Patch {feature['name']} executable",
+            'process_command': executable['patch_command']
         }
     ]
 }
@@ -122,12 +122,12 @@ remove = {
                     'purpose': 'Check an existing library installation',
                     'callback': lambda: package_exist(library['name']),
                     'failure_details': f"{feature['name']} is not installed"
-                },
-                {
-                    'purpose': f"Remove {feature['name']} executable",
-                    'process_command': executable['remove_command']
                 }
             ]
+        },
+        {
+            'purpose': f"Remove {feature['name']} executable",
+            'process_command': executable['remove_command']
         }
     ]
 }
