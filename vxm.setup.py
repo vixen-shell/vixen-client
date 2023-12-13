@@ -21,7 +21,7 @@ library = {
     'source': '/opt/vixen-env/bin/activate'
 }
 library['install_command'] = f"source {library['source']} && sudo pip install --upgrade pip && sudo pip install {CURRENT_PATH}"
-library['remove_command'] = f"source {library['source']} && sudo pip uninstall {library['name']}"
+library['remove_command'] = f"source {library['source']} && sudo pip uninstall {library['name']} --yes"
 
 executable = {
     'name': 'vx-client',
