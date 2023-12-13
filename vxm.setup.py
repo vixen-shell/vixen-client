@@ -33,7 +33,7 @@ executable['remove_command'] = f"sudo rm {executable['install_path']}/{executabl
 executable['patch_command'] = f'sudo sed -i "1s|.*|{executable["patch"]}|" {executable["install_path"]}/{executable["name"]}'
 
 def package_exist(name: str) -> bool:
-    result = run(f"source {library['source']} && pip show {name}", shell=True, stdout=PIPE)
+    result = run(f"source {library['source']} && pip show {name}", shell=True, stdout=PIPE, stderr=PIPE)
     if result.returncode == 0: return True
     return False
 
