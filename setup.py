@@ -19,7 +19,7 @@ setup(
     author_email='noha.poncelet@gmail.com',
     python_requires='>=3.11.6',
     install_requires=[
-        'pycairo>=1.25.1',
-        'PyGObject>=3.46.0'
+        'pycairo==1.25.1',
+        'PyGObject==3.46.0'
     ]
 )
