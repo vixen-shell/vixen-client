@@ -43,7 +43,6 @@ setup = {
         {
             'purpose': f"Install {library['name']} library",
             'process_command': library['install_command'],
-            'cancel_command': library['remove_command'],
             'requirements': [
                 {
                     'purpose': 'Check Vixen environment installation',
@@ -63,14 +62,18 @@ setup = {
         },
         {
             'purpose': f"Install {feature['name']} executable",
-            'process_command': executable['install_command'],
-            'cancel_command': executable['remove_command']
+            'process_command': executable['install_command']
         },
         {
             'purpose': f"Patch {feature['name']} executable",
             'process_command': executable['patch_command']
         }
-    ]
+    ],
+    'state': {
+        'exec_paths': [
+            f"{executable['install_path']}/{executable['name']}"
+        ]
+    }
 }
 
 update = {
@@ -130,5 +133,10 @@ remove = {
             'purpose': f"Remove {feature['name']} executable",
             'process_command': executable['remove_command']
         }
-    ]
+    ],
+    'state': {
+        'exec_paths': [
+            f"{executable['install_path']}/{executable['name']}"
+        ]
+    }
 }
