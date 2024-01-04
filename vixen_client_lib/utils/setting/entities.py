@@ -34,7 +34,7 @@ class LayerFrameSetting:
             'background': Levels.BACKGROUND
         }
 
-        self.url: str = data['url']
+        self.name: str = data['name']
         self.namespace: str = data['namespace']
         self.monitor_id: Optional[int] = data['monitor_id'] if 'monitor_id' in data else None
         self.auto_exclusive_zone: Optional[bool] = data['auto_exclusive_zone'] if 'auto_exclusive_zone' in data else None
@@ -47,7 +47,7 @@ class LayerFrameSetting:
 
 class WindowFrameSetting:
     def __init__(self, data: dict):
-        self.url: str = data['url']
+        self.name: str = data['name']
         self.title: str = data['title']
 
 class ClientSetting:
@@ -56,8 +56,8 @@ class ClientSetting:
         self.frames_mode = data['mode']
 
         frame_setting = {
-            'layers': LayerFrameSetting,
-            'windows': WindowFrameSetting
+            'layer': LayerFrameSetting,
+            'window': WindowFrameSetting
         }
 
         for frame_data in data['frames']:

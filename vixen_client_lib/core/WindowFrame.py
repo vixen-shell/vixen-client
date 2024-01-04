@@ -14,9 +14,18 @@ from ..external_libraries import Gtk
 from ..utils.setting import WindowFrameSetting
 
 class WindowFrame:
-    def __init__(self, setting: WindowFrameSetting):
+    def __init__(self, setting: WindowFrameSetting, dev: bool = False):
         self._window = Gtk.Window()
         self._window.set_title(setting.title)
-        self._window.add(webView(setting.url, -1, -1))
+
+        self._window.add(
+            webView(
+                frame_name = setting.name,
+                width = -1,
+                height = -1,
+                dev = dev
+            )
+        )
+
         self._window.connect('destroy', Gtk.main_quit)
         self._window.show_all()

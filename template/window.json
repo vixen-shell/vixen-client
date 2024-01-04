@@ -1,0 +1,9 @@
+{
+    "mode": "window",
+    "frames": [
+        {
+            "name": "root",
+            "title": "window_frame_test"
+        }
+    ]
+}

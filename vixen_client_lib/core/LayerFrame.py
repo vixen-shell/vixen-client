@@ -14,7 +14,7 @@ from .LayerShell import LayerShell
 from ..utils.setting import LayerFrameSetting
 
 class LayerFrame(LayerShell):
-    def __init__(self, setting: LayerFrameSetting):
+    def __init__(self, setting: LayerFrameSetting, dev: bool = False):
         super().__init__(
             setting.namespace,
             setting.monitor_id,
@@ -25,5 +25,13 @@ class LayerFrame(LayerShell):
             setting.margins
         )
 
-        self._window.add(webView(setting.url, setting.width, setting.height))
+        self._window.add(
+            webView(
+                frame_name = setting.name,
+                width = setting.width,
+                height = setting.height,
+                layer_frame = True,
+                dev = dev
+            )
+        )
         self._window.show_all()
