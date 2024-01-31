@@ -20,17 +20,17 @@ library = {
     'name': 'vixen_client_lib',
     'source': '/opt/vixen-env/bin/activate'
 }
-library['install_command'] = f"source {library['source']} && sudo pip install --upgrade pip && sudo pip install {CURRENT_PATH}"
-library['remove_command'] = f"source {library['source']} && sudo pip uninstall {library['name']} --yes"
+library['install_command'] = f"source {library['source']} && pip install --upgrade pip && pip install {CURRENT_PATH}"
+library['remove_command'] = f"source {library['source']} && pip uninstall {library['name']} --yes"
 
 executable = {
     'name': 'vx-client',
     'install_path': '/usr/bin',
     'patch': '#!/opt/vixen-env/bin/python'
 }
-executable['install_command'] = f"sudo cp -f {CURRENT_PATH}/{executable['name']} {executable['install_path']}"
-executable['remove_command'] = f"sudo rm {executable['install_path']}/{executable['name']}"
-executable['patch_command'] = f'sudo sed -i "1s|.*|{executable["patch"]}|" {executable["install_path"]}/{executable["name"]}'
+executable['install_command'] = f"cp -f {CURRENT_PATH}/{executable['name']} {executable['install_path']}"
+executable['remove_command'] = f"rm {executable['install_path']}/{executable['name']}"
+executable['patch_command'] = f'sed -i "1s|.*|{executable["patch"]}|" {executable["install_path"]}/{executable["name"]}'
 
 def package_exist(name: str) -> bool:
     result = run(f"source {library['source']} && pip show {name}", shell=True, stdout=PIPE, stderr=PIPE)
@@ -58,7 +58,7 @@ setup = {
         },
         {
             'purpose': 'Remove build folders',
-            'process_command': f"sudo rm -r {CURRENT_PATH}/build && sudo rm -r {CURRENT_PATH}/{library['name']}.egg-info",
+            'process_command': f"rm -r {CURRENT_PATH}/build && rm -r {CURRENT_PATH}/{library['name']}.egg-info",
         },
         {
             'purpose': f"Install {feature['name']} executable",
@@ -97,7 +97,7 @@ update = {
         },
         {
             'purpose': 'Remove build folders',
-            'process_command': f"sudo rm -r {CURRENT_PATH}/build && sudo rm -r {CURRENT_PATH}/{library['name']}.egg-info",
+            'process_command': f"rm -r {CURRENT_PATH}/build && rm -r {CURRENT_PATH}/{library['name']}.egg-info",
         },
         {
             'purpose': f"Update {feature['name']} executable",
