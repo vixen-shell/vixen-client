@@ -17,7 +17,7 @@ def webKit_settings():
     return settings
 
 def webView(
-    frame_name: str,
+    feature_name: str,
     width: int,
     height: int,
     layer_frame: bool = False,
@@ -32,7 +32,7 @@ def webView(
             Gdk.RGBA(red=0, green=0, blue=0, alpha=0.0)
         )
 
-    webview.load_uri(f"{FRONT_URL[mode(dev)]}/?frame={frame_name}")
+    webview.load_uri(f"{FRONT_URL[mode(dev)]}/?feature={feature_name}")
     webview.set_size_request(width, height)
 
     return webview

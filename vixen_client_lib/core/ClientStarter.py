@@ -15,6 +15,7 @@ from .LayerFrame import LayerFrame
 from .WindowFrame import WindowFrame
 from ..external_libraries import Gtk
 from ..utils.setting import ClientSetting
+from ..utils.globals import frameCounter
 
 class ClientStarter:
     def start(self, file_setting: str, dev: bool = False):
@@ -30,11 +31,9 @@ class ClientStarter:
             'window': WindowFrame
         }
 
-        # if self._client_setting.frames_mode == 'layer':
-        #     init_style_context()
-
         for frame_setting in self._client_setting.frame_setting_list:
-            self._frame_list.append(frame[self._client_setting.frames_mode](frame_setting, dev))
+            self._frame_list.append(frame[frame_setting.mode](frame_setting, dev))
+            frameCounter.increment()
 
         Gtk.main()
 

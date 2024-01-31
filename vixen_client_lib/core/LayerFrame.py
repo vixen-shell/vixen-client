@@ -27,7 +27,7 @@ class LayerFrame(LayerShell):
 
         self._window.add(
             webView(
-                frame_name = setting.name,
+                feature_name = setting.feature,
                 width = setting.width,
                 height = setting.height,
                 layer_frame = True,

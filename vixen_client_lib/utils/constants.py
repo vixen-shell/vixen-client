@@ -1,5 +1,5 @@
 FRONT_URL = {
-    'release': 'http://localhost:8999',
+    'release': 'http://localhost:6492',
     'dev': 'http://localhost:5173'
 }
 

@@ -1,9 +1,15 @@
 {
-    "mode": "window",
     "frames": [
         {
-            "name": "root",
-            "title": "window_frame_test"
+            "mode": "layer",
+            "monitor_id": 2,
+            "feature": "featureA",
+            "namespace": "featureA"
+        },
+        {
+            "mode": "window",
+            "feature": "featureA",
+            "title": "featureA"
         }
     ]
 }

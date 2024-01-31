@@ -12,6 +12,7 @@ Additional Information:
 from .webView import webView
 from ..external_libraries import Gtk
 from ..utils.setting import WindowFrameSetting
+from ..utils.globals import frameCounter
 
 class WindowFrame:
     def __init__(self, setting: WindowFrameSetting, dev: bool = False):
@@ -20,12 +21,17 @@ class WindowFrame:
 
         self._window.add(
             webView(
-                frame_name = setting.name,
+                feature_name = setting.feature,
                 width = -1,
                 height = -1,
                 dev = dev
             )
         )
 
-        self._window.connect('destroy', Gtk.main_quit)
+        def on_destroy(window):
+            frameCounter.decrement()
+            if frameCounter.value == 0:
+                Gtk.main_quit()
+
+        self._window.connect('destroy', on_destroy)
         self._window.show_all()
