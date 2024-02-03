@@ -23,9 +23,9 @@ if __name__ == "__main__":
         Client to launch Vixen Shell layers and windows.
     """)
 
-    parser.add_argument('--config', '-c', type = str, help = 'Client configuration file.')
+    parser.add_argument('--feature', '-f', type = str, help = 'Feature Name.')
     parser.add_argument('--dev', '-d', default = False, type = bool, help = "Development mode. (Use 'devUrl' parameters in the configuration file.)")
 
     args = parser.parse_args()
 
-    client_starter.start(args.config, args.dev)
+    client_starter.start(args.feature, args.dev)

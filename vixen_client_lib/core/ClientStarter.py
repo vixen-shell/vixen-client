@@ -18,11 +18,13 @@ from ..utils.setting import ClientSetting
 from ..utils.globals import frameCounter
 
 class ClientStarter:
-    def start(self, file_setting: str, dev: bool = False):
+    def start(self, feature_name: str, dev: bool = False):
         self._frame_list = []
 
+        file_setting = f'/home/noha/.config/vixen/{feature_name}.json'
         with open(file_setting, 'r') as file:
             data_setting = json.load(file)
+            file.close()
         
         self._client_setting = ClientSetting(data_setting)
 
