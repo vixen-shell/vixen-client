@@ -9,9 +9,12 @@ Additional Information:
 - It would be wise to subsequently separate the creation and display functions.
 """
 
+from .ApiSocket import api_socket
 from .webView import webView
 from .LayerShell import LayerShell
+from ..external_libraries import Gtk
 from ..utils.setting import LayerFrameSetting
+from ..utils.globals import frameCounter
 
 class LayerFrame(LayerShell):
     def __init__(self, setting: LayerFrameSetting, dev: bool = False):
@@ -34,4 +37,12 @@ class LayerFrame(LayerShell):
                 dev = dev
             )
         )
+
+        def on_destroy(window):
+            frameCounter.decrement()
+            if frameCounter.value == 0:
+                api_socket.stop()
+                Gtk.main_quit()
+
+        self._window.connect('destroy', on_destroy)
         self._window.show_all()

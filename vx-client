@@ -8,24 +8,19 @@ Description       : vixen display client executable.
 License           : GPL3
 """
 
-import argparse, signal
+import argparse
 from vixen_client_lib import ClientStarter
 
-client_starter = ClientStarter()
-
-def signal_handler(sig, frame):
-    client_starter.stop()
-
 if __name__ == "__main__":
-    signal.signal(signal.SIGINT, signal_handler)
-
     parser = argparse.ArgumentParser(description = f"""
         Client to launch Vixen Shell layers and windows.
     """)
 
     parser.add_argument('--feature', '-f', type = str, help = 'Feature Name.')
+    parser.add_argument('--id', '-i', type = str, help = 'Feature Id.')
     parser.add_argument('--dev', '-d', default = False, type = bool, help = "Development mode. (Use 'devUrl' parameters in the configuration file.)")
 
     args = parser.parse_args()
 
+    client_starter = ClientStarter(args.id)
     client_starter.start(args.feature, args.dev)

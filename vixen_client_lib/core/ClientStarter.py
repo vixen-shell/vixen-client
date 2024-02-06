@@ -10,14 +10,21 @@ import os
 os.environ['GDK_BACKEND'] = 'wayland'
 
 import json
-# from .styleContext import init_style_context
+from .ApiSocket import api_socket
 from .LayerFrame import LayerFrame
 from .WindowFrame import WindowFrame
 from ..external_libraries import Gtk
 from ..utils.setting import ClientSetting
 from ..utils.globals import frameCounter
 
+import time
+
 class ClientStarter:
+    def __init__(self, client_id: str) -> None:
+        self.client_id = client_id
+        api_socket.set_client_id(client_id)
+        api_socket.start()
+        
     def start(self, feature_name: str, dev: bool = False):
         self._frame_list = []
 

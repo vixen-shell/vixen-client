@@ -20,6 +20,7 @@ setup(
     python_requires='>=3.11.6',
     install_requires=[
         'pycairo==1.25.1',
-        'PyGObject==3.46.0'
+        'PyGObject==3.46.0',
+        'websockets==12.0'
     ]
 )

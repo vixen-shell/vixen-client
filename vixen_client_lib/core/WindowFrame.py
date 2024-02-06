@@ -9,6 +9,7 @@ Additional Information:
 - It would be wise to subsequently separate the creation and display functions.
 """
 
+from .ApiSocket import api_socket
 from .webView import webView
 from ..external_libraries import Gtk
 from ..utils.setting import WindowFrameSetting
@@ -31,6 +32,7 @@ class WindowFrame:
         def on_destroy(window):
             frameCounter.decrement()
             if frameCounter.value == 0:
+                api_socket.stop()
                 Gtk.main_quit()
 
         self._window.connect('destroy', on_destroy)
