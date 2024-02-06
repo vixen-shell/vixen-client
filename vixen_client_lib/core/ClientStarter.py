@@ -28,7 +28,7 @@ class ClientStarter:
     def start(self, feature_name: str, dev: bool = False):
         self._frame_list = []
 
-        file_setting = f'/home/noha/.config/vixen/{feature_name}.json'
+        file_setting = f'{os.path.expanduser("~")}/.config/vixen/{feature_name}.json'
         with open(file_setting, 'r') as file:
             data_setting = json.load(file)
             file.close()
