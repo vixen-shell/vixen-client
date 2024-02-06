@@ -17,7 +17,7 @@ class ApiSocket:
             while True:
                 data = await websocket.recv()
 
-                if data == 'delete-event':
+                if data == 'user-close-event':
                     print('Received: ', data)
                     break
 
@@ -37,7 +37,7 @@ class ApiSocket:
             self._thread.start()
 
     def stop(self):
-        self.send('delete-event')
+        self.send('user-close-event')
         self._thread.join()
 
 api_socket = ApiSocket()
