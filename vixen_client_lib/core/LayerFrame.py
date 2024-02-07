@@ -41,7 +41,7 @@ class LayerFrame(LayerShell):
         def on_destroy(window):
             frameCounter.decrement()
             if frameCounter.value == 0:
-                api_socket.send('close-event')
+                api_socket.send({'id': 'close_client'})
 
         self._window.connect('destroy', on_destroy)
         self._window.show_all()

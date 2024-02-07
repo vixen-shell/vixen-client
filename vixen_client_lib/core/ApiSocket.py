@@ -1,5 +1,10 @@
-import  asyncio, threading, websockets
+import  asyncio, threading, websockets, json
 from ..external_libraries import Gtk
+from typing import Literal, TypedDict, Optional, Dict
+
+class EventObject(TypedDict):
+    id: Literal['close_client']
+    data: Optional[Dict]
 
 class ApiSocket:
     def __init__(self):
@@ -25,15 +30,15 @@ class ApiSocket:
             self._websocket = websocket
             while True:
                 try:
-                    data = await websocket.recv()
+                    event: EventObject = json.loads(await websocket.recv())
 
-                    if data == 'close-event':
-                        await websocket.send('close-event')
+                    if event['id'] == 'close_client':
+                        await websocket.send(json.dumps(event))
                         Gtk.main_quit()
                         break
 
                     for listener in self._listeners:
-                        listener(data)
+                        listener(event)
 
                 except Exception as e:
                     Gtk.main_quit()
@@ -44,11 +49,11 @@ class ApiSocket:
         asyncio.set_event_loop(loop)
         loop.run_until_complete(self._websocket_task())
 
-    def send(self, data):
-        async def async_send():
+    def send(self, event: EventObject):
+        async def send_event():
             if self._websocket:
-                await self._websocket.send(data)
+                await self._websocket.send(json.dumps(event))
 
-        asyncio.run(async_send())
+        asyncio.run(send_event())
 
 api_socket = ApiSocket()
