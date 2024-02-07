@@ -22,8 +22,7 @@ import time
 class ClientStarter:
     def __init__(self, client_id: str) -> None:
         self.client_id = client_id
-        api_socket.set_client_id(client_id)
-        api_socket.start()
+        api_socket.run(client_id)
         
     def start(self, feature_name: str, dev: bool = False):
         self._frame_list = []

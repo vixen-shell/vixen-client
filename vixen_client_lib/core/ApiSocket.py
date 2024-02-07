@@ -1,4 +1,5 @@
 import  asyncio, threading, websockets
+from ..external_libraries import Gtk
 
 class ApiSocket:
     def __init__(self):
@@ -7,37 +8,47 @@ class ApiSocket:
             target = self._start_thread
         )
         self._websocket = None
+        self._listeners = []
 
-    def set_client_id(self, client_id: str):
-        self._url = f'ws://localhost:6481/feature/{client_id}?subject=true'
+    def run(self, client_id: str):
+        self._url = f'ws://localhost:6481/feature/{client_id}?client=true'
+        self._thread.start()
+
+    def add_listener(self, listener):
+        self._listeners.append(listener)
+
+    def remove_listener(self, listener):
+        self._listeners.remove(listener)
 
     async def _websocket_task(self):
         async with websockets.connect(self._url) as websocket:
             self._websocket = websocket
             while True:
-                data = await websocket.recv()
+                try:
+                    data = await websocket.recv()
 
-                if data == 'user-close-event':
-                    print('Received: ', data)
+                    if data == 'close-event':
+                        await websocket.send('close-event')
+                        Gtk.main_quit()
+                        break
+
+                    for listener in self._listeners:
+                        listener(data)
+
+                except Exception as e:
+                    Gtk.main_quit()
                     break
-
+                    
     def _start_thread(self):
         loop = asyncio.new_event_loop()
         asyncio.set_event_loop(loop)
         loop.run_until_complete(self._websocket_task())
 
     def send(self, data):
-        async def _send():
-            await self._websocket.send(data)
+        async def async_send():
+            if self._websocket:
+                await self._websocket.send(data)
 
-        if self._websocket: asyncio.run(_send())
-
-    def start(self):
-        if self._url:
-            self._thread.start()
-
-    def stop(self):
-        self.send('user-close-event')
-        self._thread.join()
+        asyncio.run(async_send())
 
 api_socket = ApiSocket()

@@ -41,8 +41,7 @@ class LayerFrame(LayerShell):
         def on_destroy(window):
             frameCounter.decrement()
             if frameCounter.value == 0:
-                api_socket.stop()
-                Gtk.main_quit()
+                api_socket.send('close-event')
 
         self._window.connect('destroy', on_destroy)
         self._window.show_all()
