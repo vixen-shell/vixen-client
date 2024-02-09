@@ -9,11 +9,11 @@ Additional Information:
 - It would be wise to subsequently separate the creation and display functions.
 """
 
-from .ApiSocket import api_socket
 from .webView import webView
+from .entities import WindowFrameSetting
+from ..apiSocket import api_socket
 from ..external_libraries import Gtk
-from ..utils.setting import WindowFrameSetting
-from ..utils.globals import frameCounter
+from ..globals import frameCounter
 
 class WindowFrame:
     def __init__(self, setting: WindowFrameSetting, dev: bool = False):

@@ -8,7 +8,7 @@ License           : GPL3
 
 from .styleContext import init_style_context
 from ..external_libraries import Gdk, WebKit2
-from ..utils.constants import FRONT_URL, mode
+from ..constants import FRONT_URI
 
 def webKit_settings():
     settings = WebKit2.Settings()
@@ -32,7 +32,7 @@ def webView(
             Gdk.RGBA(red=0, green=0, blue=0, alpha=0.0)
         )
 
-    webview.load_uri(f"{FRONT_URL[mode(dev)]}/?feature={feature_name}")
+    webview.load_uri(f"{FRONT_URI(dev).http}/?feature={feature_name}")
     webview.set_size_request(width, height)
 
     return webview

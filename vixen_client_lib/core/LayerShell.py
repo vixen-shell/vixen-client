@@ -8,7 +8,7 @@ License           : GPL3
 
 from typing import Optional
 from ..external_libraries import Gdk, Gtk, GtkLayerShell
-from ..utils.layer_shell import Edges, Levels, Margins
+from .entities.layerShell import Edges, Levels, Margins
 
 class LayerShell:
     def __init__(

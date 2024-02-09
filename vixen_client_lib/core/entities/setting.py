@@ -7,7 +7,7 @@ License           : GPL3
 """
 
 from typing import Optional
-from ..layer_shell import Edges, Levels, Margins
+from .layerShell import Edges, Levels, Margins
 from ...external_libraries import GtkLayerShell
 
 class LayerFrameSetting:

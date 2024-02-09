@@ -22,5 +22,4 @@ if __name__ == "__main__":
 
     args = parser.parse_args()
 
-    client_starter = ClientStarter(args.id)
-    client_starter.start(args.feature, args.dev)
+    ClientStarter().start(args.feature, args.id, args.dev)

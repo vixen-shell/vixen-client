@@ -9,12 +9,12 @@ Additional Information:
 - It would be wise to subsequently separate the creation and display functions.
 """
 
-from .ApiSocket import api_socket
 from .webView import webView
 from .LayerShell import LayerShell
+from .entities import LayerFrameSetting
+from ..apiSocket import api_socket
 from ..external_libraries import Gtk
-from ..utils.setting import LayerFrameSetting
-from ..utils.globals import frameCounter
+from ..globals import frameCounter
 
 class LayerFrame(LayerShell):
     def __init__(self, setting: LayerFrameSetting, dev: bool = False):

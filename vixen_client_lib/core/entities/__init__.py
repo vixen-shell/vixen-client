@@ -2,8 +2,9 @@
 Author            : Nohavye
 Author's Email    : noha.poncelet@gmail.com
 Repository        : https://github.com/vixen-shell/vixen-client.git
-Description       : Setting utils.
+Description       : Layer shell utils.
 License           : GPL3
 """
 
-from .entities import ClientSetting, LayerFrameSetting, WindowFrameSetting
+from .layerShell import Edges, Levels, Margins
+from .setting import ClientSetting, LayerFrameSetting, WindowFrameSetting
