@@ -18,8 +18,7 @@ if __name__ == "__main__":
 
     parser.add_argument('--feature', '-f', type = str, help = 'Feature Name.')
     parser.add_argument('--id', '-i', type = str, help = 'Feature Id.')
-    parser.add_argument('--dev', '-d', default = False, type = bool, help = "Development mode. (Use 'devUrl' parameters in the configuration file.)")
 
     args = parser.parse_args()
 
-    ClientStarter().start(args.feature, args.id, args.dev)
+    ClientStarter().start(args.feature, args.id)

@@ -21,4 +21,4 @@ except ValueError:
                        'For example you might need to run:\n\n' +
                        'GI_TYPELIB_PATH=build/src LD_LIBRARY_PATH=build/src python3 ' + ' '.join(sys.argv))
 
-from gi.repository import Gdk, Gtk, GtkLayerShell, WebKit2
+from gi.repository import GLib, Gdk, Gtk, GtkLayerShell, WebKit2

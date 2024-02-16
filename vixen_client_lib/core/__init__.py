@@ -6,6 +6,5 @@ Description       : vixen display client core.
 License           : GPL3
 """
 
-from .LayerFrame import LayerFrame
-from .WindowFrame import WindowFrame
-from .entities import ClientSetting
+from .ClientSetting import ClientSetting
+from .frame_handler import frame_handler

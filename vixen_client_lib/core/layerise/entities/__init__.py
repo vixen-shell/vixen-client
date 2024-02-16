@@ -7,4 +7,3 @@ License           : GPL3
 """
 
 from .layerShell import Edges, Levels, Margins
-from .setting import ClientSetting, LayerFrameSetting, WindowFrameSetting

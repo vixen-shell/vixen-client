@@ -1,22 +1,29 @@
 import json, asyncio
+from typing import List, Callable
 from websockets import WebSocketClientProtocol, ConnectionClosedOK, ConnectionClosedError
 from .ApiEvents import ApiEventObject
 from .utils import run_tasks, task
 
-async def runtime_listeners(event: ApiEventObject, websocket: WebSocketClientProtocol):
+async def client_runtime_listeners(
+        event: ApiEventObject,
+        websocket: WebSocketClientProtocol
+):
     if event['id'] == 'close_client':
         await websocket.send(json.dumps(event))
         await asyncio.sleep(0.2)
         raise ConnectionClosedOK('Receive close client event', 1000)
 
 # API  SOCKET LOOP
-async def api_socket_loop(websocket: WebSocketClientProtocol, listeners):
+async def api_socket_loop(
+        websocket: WebSocketClientProtocol,
+        listeners: List[Callable[[ApiEventObject], None]]
+):
     while True:
         try:
             event: ApiEventObject = json.loads(await websocket.recv())
 
             await run_tasks([
-                task(runtime_listeners(event, websocket))
+                task(client_runtime_listeners(event, websocket))
             ])
 
             for listener in listeners:

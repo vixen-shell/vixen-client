@@ -1,5 +1,6 @@
 import  asyncio, threading, websockets, json
 from websockets import ConnectionClosedOK, ConnectionClosedError
+from typing import List, Callable
 from .ApiLoop import api_socket_loop
 from .ApiEvents import ApiEventObject
 from .utils import check_port
@@ -13,16 +14,16 @@ class ApiSocket:
             target = self._start_thread
         )
         self._websocket = None
-        self._listeners = []
+        self._listeners: List[Callable[[ApiEventObject], None]] = []
 
     def run(self, client_id: str):
-        self._uri = f'{API_URI.ws}/feature/{client_id}?client=true'
+        self._uri = f'{API_URI.ws}/client/{client_id}?main_client=true'
         self._thread.start()
 
-    def add_listener(self, listener):
+    def add_listener(self, listener: Callable[[ApiEventObject], None]):
         self._listeners.append(listener)
 
-    def remove_listener(self, listener):
+    def remove_listener(self, listener: Callable[[ApiEventObject], None]):
         self._listeners.remove(listener)
 
     async def _websocket_task(self):
